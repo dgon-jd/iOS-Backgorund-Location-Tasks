@@ -18,20 +18,23 @@ class LocationService: NSObject {
   override init() {
     super.init()
     locationManager.delegate = self
+    locationManager.allowsBackgroundLocationUpdates = true
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
   }
   
   func askPermissions() {
-    if locationManager.responds(to: #selector(CLLocationManager.requestAlwaysAuthorization)) {
+    // TODO: add permission checks
       locationManager.requestAlwaysAuthorization()
-    }
   }
   
   func startSignificantChangeUpdates() {
-    locationManager.startMonitoringSignificantLocationChanges()
+    
+    locationManager.startUpdatingLocation()
+    
   }
-  
+//
   func stopSignificantChangeUpdates() {
-    locationManager.stopMonitoringSignificantLocationChanges()
+    locationManager.stopUpdatingLocation()
   }
 }
 

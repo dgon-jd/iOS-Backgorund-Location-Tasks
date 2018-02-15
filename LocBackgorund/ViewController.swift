@@ -10,28 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
   var locationService = LocationService()
-  
+  var timer = Timer()
   override func viewDidLoad() {
     super.viewDidLoad()
     setupAutoUpload()
-  
-    // Do any additional setup after loading the view, typically from a nib.
+    locationService.startSignificantChangeUpdates
   }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
   func setupAutoUpload() {
     locationService.locationChanged = {
-      print("[LOG] uploading something]")
+      print("[LOG] uploading something")
+
     }
     
     locationService.statusChanged = {
       print("[LOG] location service status changed")
     }
+    
+    locationService.askPermissions()
   }
-
+  
+  func runTimer() {
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+  }
+  @objc func updateTimer() {
+    print("time")
+  }
 }
 
