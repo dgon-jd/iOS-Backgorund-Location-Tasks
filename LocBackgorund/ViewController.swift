@@ -14,9 +14,10 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupAutoUpload()
-    locationService.startSignificantChangeUpdates
+    locationService.startSignificantChangeUpdates()
   }
 
+  
   func setupAutoUpload() {
     locationService.locationChanged = {
       print("[LOG] uploading something")
